@@ -25,6 +25,9 @@ lerna-debug.log*
 # Generated/exported files
 exports/
 
+# Scripts
+scripts/
+
 # Editor / IDE files
 .vscode/*
 !.vscode/extensions.json
@@ -38,6 +41,3 @@ exports/
 
 # Local-only files
 *.local
-
-# Scripts
-scripts/
