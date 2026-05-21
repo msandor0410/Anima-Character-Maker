@@ -1,0 +1,35 @@
+flowchart TD
+
+  S01["▶ S01_login<br/>Bejelentkezési oldal"]
+  S02["S02_register<br/>Regisztrációs oldal"]
+  S03["S03_dashboard<br/>Fő oldal"]
+  S04["S04_new_character<br/>Karakter készítő oldal"]
+  S05["S05_character_details<br/>Karakter részletek oldal"]
+  S06["S06_character_edit<br/>Karakter szerkesztő oldal"]
+  S07["S07_character_game<br/>Játék oldal"]
+  S08["S08_encyclopedia<br/>Enciklopédia oldal"]
+  S09["S09_profile<br/>Profil oldal"]
+
+  S01 -->|"Login gomb"| S03
+  S01 -->|"Register link"| S02
+
+  S02 -->|"Back to login"| S01
+  S02 -->|"Sikeres regisztráció után"| S01
+
+  S03 -->|"New Character"| S04
+  S03 -->|"Details"| S05
+  S03 -->|"Edit"| S06
+  S03 -->|"Game"| S07
+  S03 -->|"Encyclopedia"| S08
+  S03 -->|"Profile"| S09
+
+  S05 -->|"Edit"| S06
+  S05 -->|"Back"| S03
+
+  S06 -->|"Save"| S05
+  S06 -->|"Back"| S03
+
+  S07 -->|"Back to Dashboard"| S03
+  S08 -->|"Back to Dashboard"| S03
+  S09 -->|"Back to Dashboard"| S03
+  S09 -->|"Logout"| S01

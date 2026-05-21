@@ -1,0 +1,42 @@
+{
+  "name": "anima-builder",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "npm run test:unit",
+    "test:unit": "vitest --config vitest.config.ts",
+    "test:unit:watch": "vitest",
+    "test:smoke": "cross-env FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 FIREBASE_AUTH_EMULATOR_HOST=127.0.0.1:9099 FIREBASE_PROJECT_ID=demo-anima node tests/smoke/firestore-smoke.mjs",
+    "test:e2e": "cucumber-js --import tests/e2e/**/*.js --publish-quiet",
+    "test:e2e:all": "concurrently -k -s first -n EMU,DEV,E2E \"firebase emulators:start --only auth,firestore --project demo-anima\" \"cross-env VITE_USE_EMULATORS=true VITE_FIREBASE_PROJECT_ID=demo-anima VITE_FIREBASE_API_KEY=dummy VITE_FIREBASE_AUTH_DOMAIN=dummy VITE_FIREBASE_STORAGE_BUCKET=dummy VITE_FIREBASE_MESSAGING_SENDER_ID=dummy VITE_FIREBASE_APP_ID=dummy vite --host 127.0.0.1 --port 5173 --strictPort\" \"wait-on tcp:127.0.0.1:9099 tcp:127.0.0.1:8080 http://127.0.0.1:5173 && node tests/e2e/seed.mjs && npm run test:e2e\""
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.3.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "concurrently": "^9.2.1",
+    "cross-env": "^7.0.3",
+    "firebase-tools": "^15.4.0",
+    "jsdom": "^26.0.0",
+    "playwright": "^1.55.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4",
+    "vitest": "^3.2.4",
+    "wait-on": "^8.0.3"
+  },
+  "dependencies": {
+    "firebase": "^12.8.0",
+    "firebase-admin": "^13.6.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-router-dom": "^7.13.0"
+  }
+}
